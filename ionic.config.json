@@ -1,0 +1,7 @@
+{
+  "name": "sharesearch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
