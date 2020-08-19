@@ -1,0 +1,32 @@
+@import '../theme/fonts.scss';
+body{
+    font-family: 'Open Sans';
+};
+
+br {
+    line-height: 300%;
+ };
+
+.item-input {
+    border-style: dotted;
+    border-color: blueviolet;
+	position: relative;
+    
+    left: 0px;
+    top: 135px;
+    background-color: transparent;
+    width:100%;
+}
+.item.item-input span{width:auto;}
+.item.item-input input{width:68%;}
+input::-webkit-input-placeholder {
+    color: white;
+   }
+
+.use-primary{
+    background-color: var(--ion-color-primary);
+}
+
+.line{
+    width: 100%;
+}

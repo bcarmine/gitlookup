@@ -1,19 +1,16 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs
+  IonSpinner
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { ellipse, square, triangle, codeSlashOutline } from 'ionicons/icons';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import './App.css'
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,34 +30,46 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import {getCurrentUser} from './firebaseConfig';
+import { useDispatch } from 'react-redux';
+import { setUserState } from './redux/actions';
+import Tab1 from './pages/Tab1';
+import TabBar from './pages/TabBar';
+import { Route } from 'react-router';
 
-const App: React.FC = () => (
-  <IonApp>
+const RoutingSystem: React.FC =() => {
+  return(
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <IonRouterOutlet>
+        <Route path="/" component={Login} exact />
+        <Route path="/tab1" component={Tab1} exact />
+        <Route path="/tabbar" component={TabBar} exact/>
+        <Route path="/register" component={Register} exact />
+        <Route path="/login" component={Login} exact />
+      </IonRouterOutlet>
     </IonReactRouter>
-  </IonApp>
-);
+  )
+}
+
+const App: React.FC = () => {
+  const [busy, setBusy] = useState(true)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getCurrentUser().then((user:any) => {
+      setBusy(true)
+      if(user){
+        // logged in
+        dispatch(setUserState(user.email))
+        window.history.replaceState({}, '', '/tabbar')
+      }else{
+        //not logged in
+        window.history.replaceState({}, '/', '')
+      }
+      setBusy(false)
+    })
+  },[])
+return <IonApp> {busy ? <IonSpinner name="bubbles" class="spinnerCenter"/>:<RoutingSystem/>}</IonApp>
+};
 
 export default App;
