@@ -52,7 +52,6 @@ const Tab1: React.FC = () => {
                   type="submit">Submit</IonButton>
           </IonCol>
         </IonRow>
-
         
       </IonGrid>
       

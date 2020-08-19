@@ -20,6 +20,7 @@ export const TabBar: React.FC = () => (
     </IonRouterOutlet>
       
     <IonTabBar slot="bottom">
+      
       <IonTabButton tab="add" href="/tab1">
         <IonIcon icon={personAddOutline} />
         <IonLabel>Add User</IonLabel>

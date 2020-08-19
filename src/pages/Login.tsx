@@ -43,6 +43,7 @@ const Login: React.FC = () => {
 
         <IonRow class="ion-align-items-center ion-justify-content-center ion-padding">
           <IonCol>
+
             <IonText class="ion-text-center">
               <h3>Welcome to GitLookup!</h3>
               <hr className="use-primary"/><br/>

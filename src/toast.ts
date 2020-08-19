@@ -5,5 +5,4 @@ export async function toast(message : string, duration=2000){
 
     document.body.appendChild(toast)
     return toast.present()
-
 }

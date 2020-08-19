@@ -11,6 +11,7 @@ const config ={
     measurementId: "G-6S8BVM71B1"
 };
 
+
 firebase.initializeApp(config)
 
 export async function getDB(){

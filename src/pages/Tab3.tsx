@@ -43,7 +43,6 @@ class Watchlist extends React.Component{
 
 }
 
-
 const Tab3: React.FC = () => {
   console.log(getData())
   return (

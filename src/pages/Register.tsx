@@ -15,6 +15,7 @@ import { toast } from '../toast';
 import {registerUser} from '../firebaseConfig'
 import { useHistory } from 'react-router-dom';
 
+
 const Register: React.FC = () => {
   const [busy, setBusy] = useState<boolean>(false)
   const [email, setEmail] = useState('')

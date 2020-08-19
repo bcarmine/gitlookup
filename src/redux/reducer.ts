@@ -1,7 +1,6 @@
 const defaultState = {
     user: {}
 }
-
 export default function reducer(
     state =defaultState, 
     {type, payload}:{type: string, payload:any}
@@ -16,5 +15,4 @@ export default function reducer(
                 }
         }
     return state
-
 }
