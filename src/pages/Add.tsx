@@ -8,17 +8,21 @@ import { IonHeader,
           IonRow,
           IonText,
           IonInput,
-          IonButton} from '@ionic/react';
+          IonButton,
+          IonLoading} from '@ionic/react';
 import './Main.css';
-//import { logoutUser, getDB, getData } from '../firebaseConfig';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
 const x = ['Company 1', 'Company 2', 'Company 3']
 
-const Tab1: React.FC = () => {
+const Add: React.FC = () => {
   const [username, setUsername] = useState('')
+  const email = useSelector((state:any) => state.user.email)
 
   return (
     <IonPage>
+      <Redirect to="/tabbar"></Redirect>
       <IonHeader>
         <IonToolbar>
           <IonTitle class="ion-text-center">Add Git User</IonTitle>
@@ -30,6 +34,7 @@ const Tab1: React.FC = () => {
           <IonCol>
             <IonText class="ion-text-center">
               <h3>Let's get started!</h3>
+              <h5>{email}</h5>
               <hr className="use-primary"/><br/>
             </IonText>
             <IonText>
@@ -59,36 +64,5 @@ const Tab1: React.FC = () => {
   );
 };
 
-/**
- *         <IonItem>
-          <IonLabel>Pokémon Yellow</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Mega Man X</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>The Legend of Zelda</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Pac-Man</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Super Mario World</IonLabel>
-        </IonItem>
-
-
-        <IonContent>
-      <IonList> 
-        {x.map(word => (
-          <IonItem key={word.toString()}>
-            <IonLabel>{word}</IonLabel>
-          </IonItem>
-        ))}
-      </IonList>
-              
-      </IonContent>
- */
-//<IonButton onClick={logoutUser} href="/login">Logout</IonButton>
-
-export default Tab1;
+export default Add;
 

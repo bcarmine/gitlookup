@@ -8,9 +8,9 @@ import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle, codeSlashOutline } from 'ionicons/icons';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Add from './pages/Add';
+import TabBar from './pages/TabBar';
 import './App.css'
-
-
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,17 +33,18 @@ import './theme/variables.css';
 import {getCurrentUser} from './firebaseConfig';
 import { useDispatch } from 'react-redux';
 import { setUserState } from './redux/actions';
-import Tab1 from './pages/Tab1';
-import TabBar from './pages/TabBar';
-import { Route } from 'react-router';
+
+import { Route, Redirect, useHistory } from 'react-router';
+import Tab2 from './pages/Tab2';
 
 const RoutingSystem: React.FC =() => {
   return(
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/" component={Login} exact />
-        <Route path="/tab1" component={Tab1} exact />
+        <Route path="/" component={Login} exact/>
         <Route path="/tabbar" component={TabBar} exact/>
+        <Route path="/add" component={Add} exact/>
+        <Route path="/tab2" component={Tab2} exact/>
         <Route path="/register" component={Register} exact />
         <Route path="/login" component={Login} exact />
       </IonRouterOutlet>
@@ -51,21 +52,20 @@ const RoutingSystem: React.FC =() => {
   )
 }
 
-
 const App: React.FC = () => {
   const [busy, setBusy] = useState(true)
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     getCurrentUser().then((user:any) => {
-      setBusy(true)
       if(user){
         // logged in
         dispatch(setUserState(user.email))
         window.history.replaceState({}, '', '/tabbar')
       }else{
         //not logged in
-        window.history.replaceState({}, '/', '')
+        window.history.replaceState({}, '', '/')
       }
       setBusy(false)
     })

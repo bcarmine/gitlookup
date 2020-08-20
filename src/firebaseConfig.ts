@@ -10,8 +10,6 @@ const config ={
     appId: "1:644574263867:web:830305d5e132591f917a1e",
     measurementId: "G-6S8BVM71B1"
 };
-
-
 firebase.initializeApp(config)
 
 export async function getDB(){
@@ -28,6 +26,7 @@ export async function getData(){
 
 export async function logoutUser(){
     console.log('logout')
+    toast('Logout successful', 4000)
     return firebase.auth().signOut()
 }
 
@@ -47,9 +46,8 @@ export function getCurrentUser(){
 export async function loginUser(email: string, password:string){
     try{
         const res = await firebase.auth().signInWithEmailAndPassword(email, password)
-        return res
+        return res;
     }catch(error){
-        console.log(error)
         toast(error.message, 4000)
         return false
     }

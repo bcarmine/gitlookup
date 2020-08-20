@@ -13,7 +13,8 @@ import { IonHeader,
 import './Main.css';
 import { toast } from '../toast';
 import {registerUser} from '../firebaseConfig'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+import Login from './Login';
 
 
 const Register: React.FC = () => {
@@ -21,7 +22,6 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [cpassword, setCPassword] = useState('')
-  const history = useHistory()
 
   async function register(){
       setBusy(true)
@@ -33,13 +33,9 @@ const Register: React.FC = () => {
       }
       const res = await registerUser(email, password)
       if(res){
-          toast('Registration successful')
+          toast('Registration successful!')
       }
       setBusy(false)
-  }
-
-  function toLogin(){
-    history.replace('/login')
   }
 
   return (
@@ -50,7 +46,7 @@ const Register: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonLoading 
-          message="Registration in progress.." 
+          message="Registration in progress..." 
           duration={0} isOpen={busy}/>
       
       <IonGrid class="ion-padding">
@@ -89,7 +85,7 @@ const Register: React.FC = () => {
         <IonRow>
           <IonCol class="ion-text-center ion-justify-content-flex-end">
             <br/>
-            <p>Already have an account? <a onClick={toLogin}>Login</a></p>
+            <p>Already have an account? <Link to='/login'>Login</Link></p>
           </IonCol>
         </IonRow>
 
