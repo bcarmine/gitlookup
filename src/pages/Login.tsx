@@ -40,7 +40,6 @@ const Login: React.FC = () => {
       <IonLoading message="Please wait.." duration={0} isOpen={busy}/>
       
       <IonGrid class="ion-padding">
-
         <IonRow class="ion-align-items-center ion-justify-content-center ion-padding">
           <IonCol>
 
