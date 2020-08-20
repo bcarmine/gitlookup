@@ -5,7 +5,7 @@ import { logoutUser } from '../firebaseConfig';
 import { Route, Redirect, useHistory } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import Add from './Add';
-import Tab2 from './Tab2';
+import WatchlistTab from './WatchlistTab';
 import Tab3 from './Tab3';
 
 const TabBar: React.FC = () => {
@@ -14,10 +14,10 @@ const TabBar: React.FC = () => {
 <IonReactRouter>
   <IonTabs>
     <IonRouterOutlet>
-      <Route path="/add" component={Add} exact={true}/>
-      <Route path="/tab2" component={Tab2} exact/>
+      <Route path="/tabbar/add" component={Add} exact={true}/>
+      <Route path="/watchlist" component={WatchlistTab} exact={true}/>
       <Route path="/tab3" component={Tab3} exact/>
-      <Route path="/tabbar" render={() => <Redirect to='/add'/>} exact={true} />
+      <Route path="/tabbar" render={() => <Redirect to='/tabbar/add'/>} exact={true} />
     </IonRouterOutlet>
     <IonLoading 
           message="Registration in progress..." 
@@ -30,7 +30,7 @@ const TabBar: React.FC = () => {
         <IonLabel>Add User</IonLabel>
       </IonTabButton>
 
-      <IonTabButton tab="watchlist" href="/tab2">
+      <IonTabButton tab="watchlist" href="/watchlist">
         <IonIcon icon={listOutline} />
         <IonLabel>Watchlist</IonLabel>
       </IonTabButton>

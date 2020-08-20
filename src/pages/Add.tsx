@@ -8,24 +8,26 @@ import { IonHeader,
           IonRow,
           IonText,
           IonInput,
-          IonButton,
-          IonLoading} from '@ionic/react';
+          IonButton} from '@ionic/react';
 import './Main.css';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
+import { saveUsernames, Usernames, UsernamesContextConsumer } from '../UsernameState'
+
 const x = ['Company 1', 'Company 2', 'Company 3']
 
 const Add: React.FC = () => {
-  const [username, setUsername] = useState('')
-  const email = useSelector((state:any) => state.user.email)
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const email = useSelector((state:any) => state.user.email);
 
   return (
     <IonPage>
       <Redirect to="/tabbar"></Redirect>
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-center">Add Git User</IonTitle>
+          <IonTitle class="ion-text-center">Add Github User</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -34,7 +36,6 @@ const Add: React.FC = () => {
           <IonCol>
             <IonText class="ion-text-center">
               <h3>Let's get started!</h3>
-              <h5>{email}</h5>
               <hr className="use-primary"/><br/>
             </IonText>
             <IonText>
@@ -48,18 +49,30 @@ const Add: React.FC = () => {
         <IonRow class="ion-padding">
           <IonCol>
               <IonInput 
-                  placeholder="github username:" 
-                  onIonChange={(e: any) => setUsername(e.target.value)}
+                  placeholder="name:" 
+                  onIonChange={(e: any) => setName(e.detail.value!)}
                   class="ion-align-self-stretch"/>
-              <IonButton 
-                  //onClick={}
-                  expand="full"
-                  type="submit">Submit</IonButton>
+              <IonInput 
+                  placeholder="github username:" 
+                  onIonChange={(e: any) => setUsername(e.detail.value!)}
+                  class="ion-align-self-stretch"/>
+              <UsernamesContextConsumer>
+                {(context : Usernames) =>(
+                  <IonButton onClick={ e =>
+                    {
+                      context.usernames ? context.usernames.push({name: name, username: username}):
+                                          context.usernames = [{name: name, username : username}]
+                    saveUsernames(context.usernames) //save to local storage
+                    }
+                    
+                }
+                expand="full" type="submit" href='/'>Submit</IonButton> //href forces the input fields reset
+                )}
+              </UsernamesContextConsumer>
           </IonCol>
         </IonRow>
         
-      </IonGrid>
-      
+      </IonGrid>      
     </IonPage>
   );
 };

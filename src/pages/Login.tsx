@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLoading, IonText, IonRow, IonGrid, IonCol, IonSpinner, IonRouterLink, IonRouterOutlet } from '@ionic/react';
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLoading, IonText, IonRow, IonGrid, IonCol, IonSpinner, IonRouterLink, IonRouterOutlet, IonBackdrop } from '@ionic/react';
 import './Main.css';
 import {loginUser, getCurrentUser} from '../firebaseConfig'
 import { toast } from '../toast';
@@ -21,7 +21,7 @@ const Login: React.FC = () => {
         if(res){
             dispatch(setUserState(res.user.email))
             toast('Login successful')
-            history.replace('/add')
+            history.replace('/add') //add
         }
         setBusy(false)
     }
@@ -73,6 +73,7 @@ const Login: React.FC = () => {
           </IonCol>
         </IonRow>
       </IonGrid>
+
     </IonPage>
     
   );
