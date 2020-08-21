@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonBadge, IonRouterOutlet, IonLoading } from '@ionic/react';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet, IonLoading } from '@ionic/react';
 import { logOutOutline, listOutline, pencilOutline, personAddOutline} from 'ionicons/icons';
 import { logoutUser } from '../firebaseConfig';
 import { Route, Redirect, useHistory } from 'react-router';
@@ -14,10 +14,10 @@ const TabBar: React.FC = () => {
 <IonReactRouter>
   <IonTabs>
     <IonRouterOutlet>
-      <Route path="/tabbar/add" component={Add} exact={true}/>
+      <Route path="/tabbar/add" component={Add}/>
       <Route path="/watchlist" component={WatchlistTab} exact={true}/>
       <Route path="/tab3" component={Tab3} exact/>
-      <Route path="/tabbar" render={() => <Redirect to='/tabbar/add'/>} exact={true} />
+      <Route path="/tabbar" render={() => <Redirect to='/tabbar/add'/>} exact={true}/>
     </IonRouterOutlet>
     <IonLoading 
           message="Registration in progress..." 

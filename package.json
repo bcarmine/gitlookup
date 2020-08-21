@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^8.0.3",
     "@types/jest": "^24.0.25",
     "@types/node": "^12.12.24",
+    "@types/node-fetch": "^2.5.7",
     "@types/puppeteer": "^3.0.1",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
@@ -20,6 +21,7 @@
     "@types/uuid": "^8.3.0",
     "firebase": "^7.18.0",
     "ionicons": "^5.0.0",
+    "node-fetch": "^2.6.0",
     "puppeteer": "^5.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.0",
@@ -31,6 +33,7 @@
     "typescript": "3.8.3"
   },
   "scripts": {
+    "dev": "react-scripts start --port $PORT",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

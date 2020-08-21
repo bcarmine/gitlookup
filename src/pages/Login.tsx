@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLoading, IonText, IonRow, IonGrid, IonCol, IonSpinner, IonRouterLink, IonRouterOutlet, IonBackdrop } from '@ionic/react';
+import { IonHeader, 
+          IonPage, 
+          IonTitle, 
+          IonToolbar, 
+          IonInput, 
+          IonButton, 
+          IonLoading, 
+          IonText, 
+          IonRow, 
+          IonGrid, 
+          IonCol } from '@ionic/react';
 import './Main.css';
-import {loginUser, getCurrentUser} from '../firebaseConfig'
+import {loginUser} from '../firebaseConfig'
 import { toast } from '../toast';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setUserState } from '../redux/actions';
-import { useDispatch } from 'react-redux';
 
 const Login: React.FC = () => {
     const [busy, setBusy] = useState<boolean>(false)
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
     const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -19,15 +27,16 @@ const Login: React.FC = () => {
         setBusy(true)
         const res:any = await loginUser(email, password)
         if(res){
-            dispatch(setUserState(res.user.email))
+            //dispatch(setUserState(res.user.email))
             toast('Login successful')
-            history.replace('/add') //add
+            history.replace('/tabbar/add')
+            history.replace('/tabbar') //add
         }
         setBusy(false)
     }
 
   return (
-    <IonPage>    
+    <IonPage>   
       <IonHeader>
         <IonToolbar>
           <IonTitle class="ion-text-center">GitLookup</IonTitle>
@@ -74,8 +83,7 @@ const Login: React.FC = () => {
         </IonRow>
       </IonGrid>
 
-    </IonPage>
-    
+    </IonPage>    
   );
 };
 

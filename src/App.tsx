@@ -38,16 +38,17 @@ import { useDispatch } from 'react-redux';
 import { setUserState } from './redux/actions';
 
 const RoutingSystem: React.FC =() => {
+  //<Route path="/" component={Login} exact/>
+  //<Route path="/add" component={Add} exact/>
   return(
     <UsernamesContextProvider>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/" component={Login} exact/>
           <Route path="/tabbar" component={TabBar} exact/>
           <Route path="/add" component={Add} exact/>
           <Route path="/watchlist" component={WatchlistTab} exact/>
           <Route path="/register" component={Register} exact />
-          <Route path="/login" component={Login} exact />
+          <Route path="/" component={Login} exact />
         </IonRouterOutlet>
       </IonReactRouter>
     </UsernamesContextProvider>

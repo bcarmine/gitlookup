@@ -15,13 +15,10 @@ import { Redirect } from 'react-router';
 
 import { saveUsernames, Usernames, UsernamesContextConsumer } from '../UsernameState'
 
-const x = ['Company 1', 'Company 2', 'Company 3']
-
 const Add: React.FC = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
-  const email = useSelector((state:any) => state.user.email);
-
+  //const email = useSelector((state:any) => state.user.email);
   return (
     <IonPage>
       <Redirect to="/tabbar"></Redirect>
@@ -36,6 +33,7 @@ const Add: React.FC = () => {
           <IonCol>
             <IonText class="ion-text-center">
               <h3>Let's get started!</h3>
+              <h3>Test</h3>
               <hr className="use-primary"/><br/>
             </IonText>
             <IonText>
@@ -72,8 +70,10 @@ const Add: React.FC = () => {
           </IonCol>
         </IonRow>
         
-      </IonGrid>      
+      </IonGrid>     
     </IonPage>
+
+    
   );
 };
 

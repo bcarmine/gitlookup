@@ -21,7 +21,7 @@ export async function saveUsernames(us : Username[]) {
         key: 'usernames',
         value: JSON.stringify(us)
     })
-    toast("Waitlist updated successfully!", 2000) 
+    toast("Waitlist updated successfully!", 4000) 
 }
 
 /**

@@ -18,7 +18,7 @@ import { IonHeader,
 import './Main.css';
 import { saveUsernames, Username, Usernames, UsernamesContextConsumer } from '../UsernameState';
 import uuid from 'uuid';
-import { closeOutline, trashOutline } from 'ionicons/icons';
+import { trashOutline } from 'ionicons/icons';
 import { Redirect, useHistory } from 'react-router';
 
 const WatchlistTab: React.FC = () => {
@@ -36,10 +36,6 @@ const WatchlistTab: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonText class="ion-text-center ion-padding">
-          <h3>Here's your watchlist!</h3>
-          <hr className="use-secondary"/><br/>
-        </IonText>
 
         <UsernamesContextConsumer>
           { (context : Usernames) =>
