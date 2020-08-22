@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet, IonLoading } from '@ionic/react';
 import { logOutOutline, listOutline, pencilOutline, personAddOutline} from 'ionicons/icons';
 import { logoutUser } from '../firebaseConfig';
-import { Route, Redirect, useHistory } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import Add from './Add';
 import WatchlistTab from './WatchlistTab';
 import Tab3 from './Tab3';
+import './Main.css'
 
 const TabBar: React.FC = () => {
   const [busy] = useState<boolean>(true)
@@ -30,12 +31,12 @@ const TabBar: React.FC = () => {
         <IonLabel>Add User</IonLabel>
       </IonTabButton>
 
-      <IonTabButton tab="watchlist" href="/watchlist">
-        <IonIcon icon={listOutline} />
+      <IonTabButton class="use-tertiary-selected" tab="watchlist" href="/watchlist">
+        <IonIcon  icon={listOutline} />
         <IonLabel>Watchlist</IonLabel>
       </IonTabButton>
 
-      <IonTabButton tab="edit" href="/tab3">
+      <IonTabButton class="button3" tab="edit" href="/tab3">
         <IonIcon icon={pencilOutline} />
         <IonLabel>Edit Watchlist</IonLabel>
       </IonTabButton>

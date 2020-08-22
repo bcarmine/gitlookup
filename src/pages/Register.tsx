@@ -13,8 +13,7 @@ import { IonHeader,
 import './Main.css';
 import { toast } from '../toast';
 import {registerUser} from '../firebaseConfig'
-import { useHistory, Link, Redirect } from 'react-router-dom';
-import Login from './Login';
+import { Link } from 'react-router-dom';
 
 
 const Register: React.FC = () => {
@@ -25,7 +24,7 @@ const Register: React.FC = () => {
 
   async function register(){
       setBusy(true)
-      if(password != cpassword){
+      if(password !== cpassword){
           return toast('Passwords do not match')
       }
       if(email.trim() === '' || password.trim() === ''){
@@ -70,9 +69,11 @@ const Register: React.FC = () => {
                 onIonChange={(e: any) => setEmail(e.target.value)}/>
             <IonInput 
                 placeholder="password..."
+                type="password"
                 onIonChange={(e:any) => setPassword(e.target.value)}/>
             <IonInput 
                 placeholder="confirm password..."
+                type="password"
                 onIonChange={(e:any) => setCPassword(e.target.value)}/>
             <IonButton 
                 onClick={register}

@@ -10,14 +10,16 @@ import { IonHeader,
           IonInput,
           IonButton} from '@ionic/react';
 import './Main.css';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
 import { saveUsernames, Usernames, UsernamesContextConsumer } from '../UsernameState'
 
+
 const Add: React.FC = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+
   //const email = useSelector((state:any) => state.user.email);
   return (
     <IonPage>
@@ -33,7 +35,6 @@ const Add: React.FC = () => {
           <IonCol>
             <IonText class="ion-text-center">
               <h3>Let's get started!</h3>
-              <h3>Test</h3>
               <hr className="use-primary"/><br/>
             </IonText>
             <IonText>
@@ -56,20 +57,25 @@ const Add: React.FC = () => {
                   class="ion-align-self-stretch"/>
               <UsernamesContextConsumer>
                 {(context : Usernames) =>(
-                  <IonButton onClick={ e =>
+                  <IonButton onClick={e =>
                     {
-                      context.usernames ? context.usernames.push({name: name, username: username}):
-                                          context.usernames = [{name: name, username : username}]
-                    saveUsernames(context.usernames) //save to local storage
+                      context.usernames ? context.usernames.push({name: name, 
+                                                                  username: username, 
+                                                                  numProjects: 0,
+                                                                  projects: []}):
+                                          context.usernames = [{name: name, 
+                                                                username : username, 
+                                                                numProjects: 0,
+                                                              projects: []}]
+                      saveUsernames(context.usernames) //save to local storage
+                      
                     }
-                    
                 }
-                expand="full" type="submit" href='/'>Submit</IonButton> //href forces the input fields reset
+                expand="full" type="submit">Submit</IonButton> //href='/' forces the input fields reset
                 )}
               </UsernamesContextConsumer>
           </IonCol>
         </IonRow>
-        
       </IonGrid>     
     </IonPage>
 

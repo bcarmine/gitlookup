@@ -3,18 +3,23 @@ import { IonContent,
           IonHeader, 
           IonPage, 
           IonTitle, 
-          IonToolbar } from '@ionic/react';
+          IonToolbar, 
+          IonLoading} from '@ionic/react';
 import './Tab3.css';
+import { Usernames, UsernamesContextConsumer } from '../UsernameState';
 
 const Tab3: React.FC = () => {
   const [projects, setProjects] = useState([]);
   
-  useEffect(() => {
+  /**
+   * useEffect(() => {
     fetch('./api/projects')
     .then(res => res.json())
     .then(projects => setProjects(projects))
     .catch(err => console.log(err))
   },[]);
+   */
+  
 
   return (
     <IonPage>
@@ -33,6 +38,7 @@ const Tab3: React.FC = () => {
               </div>
             ))
           ) : (<div>Loading projects...</div>)
+          //<IonLoading message="Loading projects..." isOpen={true}></IonLoading>
         }
         
       </IonContent>
