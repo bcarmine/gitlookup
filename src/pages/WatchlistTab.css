@@ -17,9 +17,18 @@ ion-item{
 
 .delete-button{
     height: 100%;
+    --box-shadow: none;
+}
+
+.delete-button:hover{
+    color: var(--ion-color-tertiary);
 }
 
 .tip-padding{
     padding-top: 5%;
     padding-left: 5%;
+}
+
+.list-padding{
+    padding-right: 6%;
 }

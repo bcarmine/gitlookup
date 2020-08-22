@@ -41,7 +41,7 @@ const WatchlistTab: React.FC = () => {
 
         <UsernamesContextConsumer>
           { (context : Usernames) =>
-          <IonList class="border-primary">
+          <IonList class="border-primary list-padding">
             <IonText><br/></IonText>
             <IonLabel class="ion-padding">Number of users on your watchlist: {context.usernames ? context.usernames.length : 0}<br/></IonLabel>
             { (context.usernames)
@@ -63,7 +63,7 @@ const WatchlistTab: React.FC = () => {
 
                         <IonCol class="ion-text-right">
                           <IonText class="label-small">
-                            <br/> Followers: {u.followers} <br/>
+                            <br/>Followers: {u.followers}<br/>
                             Following: {u.following}
                           </IonText>
                         </IonCol>
@@ -77,6 +77,7 @@ const WatchlistTab: React.FC = () => {
                         var i = context.usernames.findIndex(o => o.username === u.username); //usernames must be unique
                         if (i > -1) context.usernames.splice(i, 1);
                         updateUsernames(context.usernames);
+                        refresh();
                       }}>
                       <IonButton class="delete-button" color = "tertiary" onClick={refresh}>
                         <IonIcon icon={trashOutline}></IonIcon>
@@ -94,8 +95,6 @@ const WatchlistTab: React.FC = () => {
           </IonList>}
         </UsernamesContextConsumer>
       </IonContent>
-
-      
     </IonPage>
   );
 };
