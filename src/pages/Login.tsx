@@ -12,7 +12,7 @@ import { IonHeader,
           IonCol } from '@ionic/react';
 import './Main.css';
 import {loginUser} from '../firebaseConfig'
-import { toast } from '../toast';
+import { toast } from '../components/toast';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 

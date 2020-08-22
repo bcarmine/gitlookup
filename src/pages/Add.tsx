@@ -13,7 +13,7 @@ import './Main.css';
 //import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import { saveUsernames, Usernames, UsernamesContextConsumer } from '../UsernameState'
+import { saveUsernames, Usernames, UsernamesContextConsumer } from '../model/UsernameState'
 
 
 const Add: React.FC = () => {
@@ -47,33 +47,37 @@ const Add: React.FC = () => {
 
         <IonRow class="ion-padding">
           <IonCol>
-              <IonInput 
-                  placeholder="name:" 
-                  onIonChange={(e: any) => setName(e.detail.value!)}
-                  class="ion-align-self-stretch"/>
-              <IonInput 
-                  placeholder="github username:" 
-                  onIonChange={(e: any) => setUsername(e.detail.value!)}
-                  class="ion-align-self-stretch"/>
-              <UsernamesContextConsumer>
-                {(context : Usernames) =>(
-                  <IonButton onClick={e =>
-                    {
-                      context.usernames ? context.usernames.push({name: name, 
-                                                                  username: username, 
-                                                                  numProjects: 0,
-                                                                  projects: []}):
-                                          context.usernames = [{name: name, 
-                                                                username : username, 
-                                                                numProjects: 0,
-                                                              projects: []}]
-                      saveUsernames(context.usernames) //save to local storage
-                      
-                    }
-                }
-                expand="full" type="submit">Submit</IonButton> //href='/' forces the input fields reset
-                )}
-              </UsernamesContextConsumer>
+            <IonInput 
+                placeholder="name:" 
+                onIonChange={(e: any) => setName(e.detail.value!)}
+                class="ion-align-self-stretch"/>
+            <IonInput 
+                placeholder="github username:" 
+                onIonChange={(e: any) => setUsername(e.detail.value!)}
+                class="ion-align-self-stretch"/>
+            <UsernamesContextConsumer>
+              {(context : Usernames) =>(
+                <IonButton onClick={e =>
+                  {
+                    context.usernames ? context.usernames.push({name: name, 
+                                                              username: username, 
+                                                              projects: [],
+                                                              followers: 0,
+                                                              following: 0,
+                                                              numRepos: 0}):
+                                        context.usernames = [{name: name, 
+                                                            username : username, 
+                                                            projects: [],
+                                                            followers: 0,
+                                                            following: 0,
+                                                            numRepos: 0}]
+                    saveUsernames(context.usernames) //save to local storage
+                    
+                  }
+              }
+              expand="full" type="submit">Submit</IonButton> //href='/' forces the input fields reset
+              )}
+            </UsernamesContextConsumer>
           </IonCol>
         </IonRow>
       </IonGrid>     

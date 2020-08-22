@@ -11,7 +11,7 @@ import { IonHeader,
           IonCol, 
           IonText } from '@ionic/react';
 import './Main.css';
-import { toast } from '../toast';
+import { toast } from '../components/toast';
 import {registerUser} from '../firebaseConfig'
 import { Link } from 'react-router-dom';
 

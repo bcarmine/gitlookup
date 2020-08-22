@@ -1,5 +1,5 @@
 import * as firebase from 'firebase'
-import { toast } from './toast';
+import { toast } from './components/toast';
 const config ={
     apiKey: "AIzaSyAXsO0YnCtojH6zNt1MzotEUIojAo9eYz4",
     authDomain: "git-lookup.firebaseapp.com",

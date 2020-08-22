@@ -10,10 +10,10 @@ import Register from './pages/Register';
 import Add from './pages/Add';
 import TabBar from './pages/TabBar';
 import WatchlistTab from './pages/WatchlistTab';
-import { Route, useHistory } from 'react-router';
+import { Route } from 'react-router';
 import './App.css'
 
-import {UsernamesContextProvider} from './UsernameState'
+import {UsernamesContextProvider} from './model/UsernameState'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

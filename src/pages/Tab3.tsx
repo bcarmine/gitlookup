@@ -6,7 +6,7 @@ import { IonContent,
           IonToolbar, 
           IonLoading} from '@ionic/react';
 import './Tab3.css';
-import { Usernames, UsernamesContextConsumer } from '../UsernameState';
+import { Usernames, UsernamesContextConsumer } from '../model/UsernameState';
 
 const Tab3: React.FC = () => {
   const [projects, setProjects] = useState([]);

@@ -17,10 +17,13 @@ body{
 .use-tertiary{
     color: var(--ion-color-tertiary);
 }
+
+.use-tertiary-background{
+    background: var(--ion-color-tertiary);
+}
 .use-tertiary-selected{
     --color-selected: var(--ion-color-tertiary);
 }
-
 
 .line{
     width: 100%;
