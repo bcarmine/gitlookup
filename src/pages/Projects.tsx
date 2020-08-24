@@ -15,25 +15,34 @@ import { IonContent,
           IonItemOption,
           IonButton,
           IonIcon,
-          IonLoading} from '@ionic/react';
+          IonLoading,
+          IonLabel} from '@ionic/react';
 import { getSelectedUser, Project } from '../model/UsernameState';
-import uuid from 'uuid';
+import uuid from 'uuid'; //needed for the sliding items
 import { linkOutline } from 'ionicons/icons';
 //CSS imports
 import './Projects.css'
 import './Main.css'
 
+/**
+ * The projects page displays 
+ */
 const Projects: React.FC = () => {
+  //hook used to show ion-loading to that user doesn't interact
+  //with page while the items load
   const [busy, setBusy] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setBusy(false), 1500)
+    setTimeout(() => setBusy(false), 1500) //ion loading will display for 1.5 secs
   }, []);
 
-  
+  //get the selected used, note this could be undefined
   const user = getSelectedUser()
-  var projects: Project[] = [];
+  var projects: Project[] = []; 
   if(user){ projects = getSelectedUser().projects}
+
+  //part of the users URL to be concatenated with their username
+  //to form the whole URL
   const URL = 'https://github.com/'
 
   return (
@@ -50,11 +59,13 @@ const Projects: React.FC = () => {
         <IonText class="ion-padding">
           Note: Only showing the first 30 repos! <br/>
           Visit {user.name}'s full profile <a className="use-tertiary" href={URL.concat(user.username)}> here!</a>
+          <IonLabel class="label-medium ion-padding"><br/> <b>Hint: </b>swipe a project to the right and click on the link icon to visit the project on github.</IonLabel>
         </IonText>) 
 
         : projects.length ? (
           <IonText class="ion-padding">{user.name} has {user.numRepos} repos.<br/>
             Visit {user.name}'s full profile <a className="use-tertiary" href={URL.concat(user.name)}> here!</a>
+            <IonLabel class="label-medium ion-padding"><br/> <b>Hint: </b>swipe a project to the right and click on the link icon to visit the project on github.</IonLabel>
           </IonText>) 
 
           : <IonContent class="ion-padding ion-text-justify">

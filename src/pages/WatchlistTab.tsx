@@ -1,3 +1,4 @@
+//external imports
 import React from 'react';
 import { IonHeader, 
   IonPage, 
@@ -16,26 +17,26 @@ import { IonHeader,
   IonRow,
   IonCol,
   IonItemOption} from '@ionic/react';
-import './Main.css';
-import './WatchlistTab.css';
-import { updateUsernames, Username, Usernames, UsernamesContextConsumer, saveUsernames } from '../model/UsernameState';
-import { setSelectedUser } from '../model/UsernameState'
 import uuid from 'uuid';
 import { trashOutline, expandOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router';
+//internal imports
+import { Username, Usernames, UsernamesContextConsumer, saveUsernames } from '../model/UsernameState';
+import { setSelectedUser } from '../model/UsernameState'
 import { toast } from '../components/toast';
+//CSS imports
+import './Main.css';
+import './WatchlistTab.css';
 
 const WatchlistTab: React.FC = () => {
+  //hook used for local redirecting
   const history = useHistory()
+  /*** Local function for refreshing the page.*/
   function refresh(){ history.replace('/tabbar/watchlist') }
-
-  function redirectSelected(){ 
-    history.replace('/tabbar/projects')
-    //history.replace('/projects') 
-  }
 
   return (
     <IonPage>
+
       <IonHeader>
         <IonToolbar>
           <IonTitle class="ion-text-center">Your Watchlist</IonTitle>
@@ -45,11 +46,13 @@ const WatchlistTab: React.FC = () => {
       <IonContent>
         <UsernamesContextConsumer>
           { (context : Usernames) =>
+
           <IonList class="border-primary list-padding">
             <IonText><br/></IonText>
             <IonLabel class="ion-padding">Number of users on your watchlist: {context.usernames ? context.usernames.length : 0}<br/></IonLabel>
             { (context.usernames)
               ? context.usernames.map((u : Username) =>
+
                 <IonItemSliding key={uuid.v4()}>
                   <IonItem class="border-primary">
                     <IonGrid>
@@ -74,20 +77,20 @@ const WatchlistTab: React.FC = () => {
                     </IonGrid>
                   </IonItem>
 
-                  <IonItemOptions class="use-danger-background options-padding" side="end">
+                  <IonItemOptions class="use-danger-background" side="end">
                     <IonItemOption class="use-danger-background" 
                       onClick={() => {
                         var i = context.usernames.findIndex(o => o.username === u.username); //usernames must be unique
                         if (i > -1) context.usernames.splice(i, 1);
                         saveUsernames(context.usernames);
                       }}>
-                      <IonButton class="" color = "danger" onClick={refresh}>
+                      <IonButton class="option-button" color = "danger" onClick={refresh}>
                         <IonIcon icon={trashOutline}></IonIcon>
                       </IonButton>
                     </IonItemOption>
                   </IonItemOptions>
 
-                  <IonItemOptions class="use-tertiary-background options-padding" side="start">
+                  <IonItemOptions class="use-tertiary-background" side="start">
                     <IonItemOption class="use-tertiary-background" 
                       onClick={() => {
                         var i = context.usernames.findIndex(o => o.username === u.username);
@@ -99,6 +102,7 @@ const WatchlistTab: React.FC = () => {
                       </IonButton>
                     </IonItemOption>
                   </IonItemOptions>
+
                 </IonItemSliding>)
               : {} }
               <IonItem>
@@ -109,7 +113,9 @@ const WatchlistTab: React.FC = () => {
                 </IonText>
               </IonItem>
           </IonList>}
+
         </UsernamesContextConsumer>
+        
       </IonContent>
     </IonPage>
   );

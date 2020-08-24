@@ -1,5 +1,7 @@
 import * as firebase from 'firebase'
 import { toast } from './components/toast';
+
+//api configuration
 const config ={
     apiKey: "AIzaSyAXsO0YnCtojH6zNt1MzotEUIojAo9eYz4",
     authDomain: "git-lookup.firebaseapp.com",
@@ -12,54 +14,60 @@ const config ={
 };
 firebase.initializeApp(config)
 
-export async function getDB(){
-    return firebase.database()
-}
-
-export async function getData(){
-    var database = firebase.database()
-    return database.ref().once('value').then(function(snapshot){
-      var name = (snapshot.val())
-        //console.log(name)
-    })
-  }
-
+/**
+ * Logout the user and returns the result.
+ * Informs the user of a successful logout.
+ */
 export async function logoutUser(){
-    console.log('logout')
-    toast('Logout successful', 4000)
+    toast('Logout successful', 2000)
     return firebase.auth().signOut()
 }
 
+/**
+ * Function to determine whether there is a
+ * user signed in or not and returns the user if this is true.
+ */
 export function getCurrentUser(){
     return new Promise((resolve, reject) => {
         const unsubscribe = firebase.auth().onAuthStateChanged(function(user){
             if(user){
-                resolve(user)
+                resolve(user) //signed in
             }else{
-                resolve(null)
+                resolve(null) //not signed in
             }
             unsubscribe()
         })
     })
 }
 
+/**
+ * Attempt to Login the user through firebase. 
+ * @param email The email to use.
+ * @param password The password to use.
+ */
 export async function loginUser(email: string, password:string){
     try{
         const res = await firebase.auth().signInWithEmailAndPassword(email, password)
-        return res;
-    }catch(error){
+        return res; //return the result
+    }catch(error){ //handle an error and inform the user
         toast(error.message, 4000)
-        return false
+        return false;
     }
 }
 
+/**
+ * Attempt to register the user through firebase.
+ * Note that the register page has already checked the entered passwords match.
+ * @param email The email to register.
+ * @param password The password to register.
+ */
 export async function registerUser(email: string, password:string){
     try{
         const res = await firebase.auth().createUserWithEmailAndPassword(email, password)
-        return true
-    }catch(error){
+        return true; //if there was no error, then return true
+    }catch(error){ //handle an error and inform the user
         toast(error.message, 4000)
-        return false
+        return false;
     }
 }
 

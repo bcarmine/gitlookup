@@ -1,3 +1,4 @@
+//external imports
 import React, { useState } from 'react';
 import { IonHeader, 
           IonPage, 
@@ -10,25 +11,33 @@ import { IonHeader,
           IonRow, 
           IonGrid, 
           IonCol } from '@ionic/react';
-import './Main.css';
-import {loginUser} from '../firebaseConfig'
-import { toast } from '../components/toast';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+//local imports
+import {loginUser} from '../firebaseConfig'
+import { toast } from '../components/toast';
+//CSS imports
+import './Main.css';
 
 const Login: React.FC = () => {
+    //hook used for ion loading state
     const [busy, setBusy] = useState<boolean>(false)
-    //const dispatch = useDispatch()
-    const history = useHistory()
+    //hooks used for ion input values
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    //hook used for local redirecting
+    const history = useHistory() 
 
+    /**
+     * Login function uses firebase to login and 
+     * redirects if sucessful.
+     * Note: firebaseConfig handles unsucessful login
+     */
     async function login(){
-        setBusy(true)
+        setBusy(true) //busy state indicates ion loading
         const res:any = await loginUser(email, password)
         if(res){
-            //dispatch(setUserState(res.user.email))
-            toast('Login successful')
+            toast('Login successful', 2000)
             history.replace('/tabbar/add')
             history.replace('/tabbar') //add
         }

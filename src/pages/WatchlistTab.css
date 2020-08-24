@@ -1,34 +1,18 @@
-ion-item{
-    --border-color : var(--ion-color-tertiary)
-}
+/*List styles*/
+
+ion-item{ --border-color : var(--ion-color-tertiary) }
 
 .label-small{
     font-size: .8em;
     text-align: right;
 }
-
-.label-medium{
-    font-size: .8em;
-}
-
-.label-large{
-    font-size: 1em;
-}
+.label-medium{ font-size: .8em; }
+.label-large{ font-size: 1em; }
 
 .option-button{
     height: 100%;
     --box-shadow: none;
 }
+.option-button:hover{ color: var(--ion-color-tertiary); }
 
-.option-button:hover{
-    color: var(--ion-color-tertiary);
-}
-
-.tip-padding{
-    padding-top: 5%;
-    padding-left: 5%;
-}
-
-.list-padding{
-    padding-right: 6%;
-}
+.list-padding{ padding-right: 6%; }

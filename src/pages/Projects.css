@@ -1,7 +1,2 @@
-.size-small{
-    font-size: 0.8em;
-}
-
-.item-padding{
-    padding-top: 2%;
-}
+/*Text size for list elements*/
+.size-small{ font-size: 0.8em; }

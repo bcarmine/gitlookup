@@ -4,6 +4,8 @@ import { Plugins } from '@capacitor/core'
 import { toast } from '../components/toast';
 import { fetcher , fetchUser} from './Fetcher'
 
+// ----------------------------- Fields ------------------------------------------
+
 //field for storing the current projects from the fetch function
 var currentProj: Project[];
 //flag used to determine whether the fetcher provided a result
@@ -12,14 +14,10 @@ var resultFlag : boolean = false;
 export const { Storage } = Plugins;
 //field for storing the current user data from the fetch function 
 var currentUserData : UserData;
-
+//field for storing the currently selected user
 var selectedUser: Username;
-export function setSelectedUser(value : Username){
-    selectedUser = value;
-}
-export function getSelectedUser(){
-    return selectedUser;
-}
+
+// ----------------------------- Getters and Setters -----------------------------
 
 /**
  * Setter for the current project field.
@@ -48,6 +46,16 @@ export function setCurrentUserData(value : UserData = {followers: 0, following: 
 /** Getter for the current user data field */
 function getCurrentUserData() : UserData { return currentUserData; }
 
+/**
+ * Setter for the selected user field
+ * @param value The username object to set
+ */
+export function setSelectedUser(value : Username){ selectedUser = value; }
+/**Getter for the selected user field */
+export function getSelectedUser(){ return selectedUser; }
+
+// ----------------------------- Interfaces --------------------------------------
+
 /* Username interface: Github username that is entered by the user */
 export interface Username {
     name: string;
@@ -74,6 +82,8 @@ export interface UserData{
     following: number;
     publicRepos: number;
 }
+
+// ----------------------------- Functions ----------------------------------------
 
 /**
  * Takes some usernames, fetches their projects, 
@@ -163,12 +173,17 @@ function checkDuplicateEntry(us : Username[]){
 
 let UsernamesContext = createContext({} as Usernames);
 
-/**
- * react contexts allow you to use a provider component
- * at the highest level in the hierarchy to ensure all subcomponents
- * that want to use the consumer can get access to the state
- * stored in the relevant context
- * **/
+
+//react contexts allow you to use a provider component
+// at the highest level in the hierarchy to ensure all subcomponents
+// that want to use the consumer can get access to the state
+// stored in the relevant context
+
+ /**
+  * Context provider will provide a hook with the user data in it.
+  * The user data may be the initial empty array, or from storage.
+  * @param props Props
+  */
 function UsernamesContextProvider(props: {children: React.ReactNode; }){
     const [initialUsernames, setInitialUsernames] = useState([] as Username[]);
 

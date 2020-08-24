@@ -1,3 +1,4 @@
+//external imports
 import React, { useState } from 'react';
 import { IonHeader, 
           IonPage, 
@@ -10,21 +11,31 @@ import { IonHeader,
           IonRow, 
           IonCol, 
           IonText } from '@ionic/react';
-import './Main.css';
+import { Link, useHistory } from 'react-router-dom';
+//internal imports
 import { toast } from '../components/toast';
 import {registerUser} from '../firebaseConfig'
-import { Link, Redirect, useHistory } from 'react-router-dom';
+//CSS imports
+import './Main.css';
 
 
 const Register: React.FC = () => {
+  //hook used for ion loading
   const [busy, setBusy] = useState<boolean>(false)
+  //hooks used for ion input values
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [cpassword, setCPassword] = useState('')
+  //hook used for local redirecting
   const history = useHistory();
 
+  /**
+   * Async function for registering a user
+   * through the firebase DB.
+   * Handles incorrect input cases.
+   */
   async function register(){
-      setBusy(true)
+      setBusy(true) //set ion loading
       if(password !== cpassword){
           return toast('Passwords do not match')
       }
@@ -33,7 +44,7 @@ const Register: React.FC = () => {
       }
       const res = await registerUser(email, password)
       if(res){
-          toast('Registration successful!')
+          toast('Registration successful!', 2000)
           //redirect
           history.replace('/tabbar/add')
           history.replace('/tabbar')
@@ -48,11 +59,10 @@ const Register: React.FC = () => {
           <IonTitle class="ion-text-center">GitLookup</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonLoading 
-          message="Registration in progress..." 
-          duration={0} isOpen={busy}/>
+      <IonLoading message="Registration in progress..." duration={0} isOpen={busy}/>
       
       <IonGrid class="ion-padding">
+        
         <IonRow class="ion-align-items-center ion-justify-content-center ion-padding">
           <IonCol>
             <IonText class="ion-text-center">

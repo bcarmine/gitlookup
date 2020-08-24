@@ -30,7 +30,7 @@ export async function fetcher(username : string){
             });
             //store the projects and cast them as type Project
             setCurrentProj(gitHubProjects as Project[]);
-            setResultFlag(true);
+            setResultFlag(true); //flag = there has been a result
             
         }).catch(error => {
             //reassurance for anyone looking at the console
@@ -42,8 +42,14 @@ export async function fetcher(username : string){
 };
 
 /**
+ * Function to fetch github user information from the
+ * github user api.
+ * Fetched data is put into a currentUserData object.
  * 
- * @param username 
+ * NOTE: it is assumed that the username is a valid github
+ * username as this method is only called if fetcher succeeds. 
+ * 
+ * @param username The username to fetch data on
  */
 export async function fetchUser(username : string){
     const URLpt1 = 'https://api.github.com/users/';
@@ -55,7 +61,7 @@ export async function fetchUser(username : string){
         mode: 'cors'
     })
     .then(res => res.json())
-    .then(userData => {
+    .then(userData => { //store the user data
         setCurrentUserData({followers : userData.followers, 
             following : userData.following, publicRepos: userData.public_repos});
     });

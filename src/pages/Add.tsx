@@ -1,3 +1,4 @@
+//external imports
 import React, { useState } from 'react';
 import { IonHeader, 
           IonPage, 
@@ -9,18 +10,17 @@ import { IonHeader,
           IonText,
           IonInput,
           IonButton} from '@ionic/react';
-import './Main.css';
-//import { useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router';
-
+import { Redirect } from 'react-router';
+//local imports
 import { saveUsernames, Usernames, UsernamesContextConsumer } from '../model/UsernameState'
-
+//CSS imports
+import './Main.css';
 
 const Add: React.FC = () => {
+  //hooks used for the ion input values
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
 
-  //const email = useSelector((state:any) => state.user.email);
   return (
     <IonPage>
       <Redirect to="/tabbar"></Redirect>
@@ -58,7 +58,8 @@ const Add: React.FC = () => {
             <UsernamesContextConsumer>
               {(context : Usernames) =>(
                 <IonButton onClick={e =>
-                  {
+                  { //initially the username objects only have a name and username
+                    //the other fields will be filled by the model
                     context.usernames ? context.usernames.push({name: name, 
                                                               username: username, 
                                                               projects: [],
@@ -81,8 +82,6 @@ const Add: React.FC = () => {
         </IonRow>
       </IonGrid>     
     </IonPage>
-
-    
   );
 };
 

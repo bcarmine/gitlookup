@@ -1,40 +1,18 @@
 @import '../theme/fonts.scss';
-body{
-    font-family: 'Open Sans';
-}
-.use-primary{
-    background-color: var(--ion-color-primary);
-}
-.use-secondary{
-    background-color: var(--ion-color-secondary);
-}
-.use-secondary-text{
-    color: var(--ion-color-secondary);
-}
-.use-tertiary{
-    color: var(--ion-color-tertiary);
-}
-.use-tertiary-background{
-    background: var(--ion-color-tertiary);
-}
-.use-tertiary-selected{
-    --color-selected: var(--ion-color-tertiary);
-}
-.use-tertiary-selected2{
-    --color-selected: var(--ion-color-tertiary);
-}
-.use-danger{
-    color: var(--ion-color-danger);
-}
-.use-danger-background{
-    background: var(--ion-color-danger);
-}
-.line{
-    width: 100%;
-}
-.submit-enter{
-    position: absolute;
-    visibility: hidden;
-    left: -1000px;
-}
 
+/*Font set for all pages*/
+body{ font-family: 'Open Sans'; }
+
+/*Color setters*/
+.use-primary{ background-color: var(--ion-color-primary); }
+
+.use-secondary{ background-color: var(--ion-color-secondary); }
+.use-secondary-text{ color: var(--ion-color-secondary); }
+
+.use-tertiary{ color: var(--ion-color-tertiary); }
+.use-tertiary-background{ background: var(--ion-color-tertiary); }
+.use-tertiary-selected{ --color-selected: var(--ion-color-tertiary); }
+.use-tertiary-selected2{--color-selected: var(--ion-color-tertiary); }
+
+.use-danger{ color: var(--ion-color-danger); }
+.use-danger-background{ background: var(--ion-color-danger); }

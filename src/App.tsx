@@ -1,17 +1,19 @@
+//external imports
 import React, { useState, useEffect } from 'react';
 import {
   IonApp,
   IonRouterOutlet,
-  IonSpinner
-} from '@ionic/react';
+  IonSpinner } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+//local imports
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Add from './pages/Add';
 import TabBar from './pages/TabBar';
 import WatchlistTab from './pages/WatchlistTab';
-import Projects from './pages/Projects';
 import { Route } from 'react-router';
+import { getCurrentUser } from './firebaseConfig';
+//CSS imports
 import './App.css'
 
 import {UsernamesContextProvider} from './model/UsernameState'
@@ -34,10 +36,12 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import {getCurrentUser} from './firebaseConfig';
-import { useDispatch } from 'react-redux';
-import { setUserState } from './redux/actions';
+import Projects from './pages/Projects';
 
+
+/**
+ * Routing system defines the pages needed by all lower components
+ */
 const RoutingSystem: React.FC =() => {
   return(
     <UsernamesContextProvider>
@@ -46,6 +50,7 @@ const RoutingSystem: React.FC =() => {
           <Route path="/tabbar" component={TabBar} exact/>
           <Route path="/add" component={Add} exact/>
           <Route path="/tabbar/watchlist" component={WatchlistTab} exact/>
+          <Route path="/tabbar/projects" component={Projects} exact/>
           <Route path="/register" component={Register} exact />
           <Route path="/" component={Login} exact />
         </IonRouterOutlet>
@@ -55,23 +60,22 @@ const RoutingSystem: React.FC =() => {
 }
 
 const App: React.FC = () => {
+  //hook used to set ion spinner
   const [busy, setBusy] = useState(true)
-  const dispatch = useDispatch()
 
   useEffect(() => {
+    //if the user is already logged in, then redirect to main page
     getCurrentUser().then((user:any) => {
       if(user){
-        // logged in
-        dispatch(setUserState(user.email))
-        window.history.replaceState({}, '/', '/tabbar')
+        window.history.replaceState({}, '/', '/tabbar') // logged in
       }else{
-        //not logged in
-        window.history.replaceState({}, '', '/')
+        window.history.replaceState({}, '', '/') //not logged in
       }
-      setBusy(false)
+      setBusy(false) //stop ion spinner
     })
   },[])
-return <IonApp> {busy ? <IonSpinner name="bubbles" class="spinnerCenter"/>:<RoutingSystem/>}</IonApp>
+  //if busy, then return an ion spinner, otherwise return the routing system
+  return <IonApp> {busy ? <IonSpinner name="bubbles" class="spinnerCenter"/>:<RoutingSystem/>}</IonApp>
 };
 
 export default App;
