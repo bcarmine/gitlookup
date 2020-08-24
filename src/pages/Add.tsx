@@ -11,7 +11,7 @@ import { IonHeader,
           IonButton} from '@ionic/react';
 import './Main.css';
 //import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 import { saveUsernames, Usernames, UsernamesContextConsumer } from '../model/UsernameState'
 
@@ -50,11 +50,11 @@ const Add: React.FC = () => {
             <IonInput 
                 placeholder="name:" 
                 onIonChange={(e: any) => setName(e.detail.value!)}
-                class="ion-align-self-stretch"/>
+                class="ion-align-self-stretch" clearInput={true}/>
             <IonInput 
                 placeholder="github username:" 
                 onIonChange={(e: any) => setUsername(e.detail.value!)}
-                class="ion-align-self-stretch"/>
+                class="ion-align-self-stretch" clearInput={true}/>
             <UsernamesContextConsumer>
               {(context : Usernames) =>(
                 <IonButton onClick={e =>
@@ -72,10 +72,9 @@ const Add: React.FC = () => {
                                                             following: 0,
                                                             numRepos: 0}]
                     saveUsernames(context.usernames) //save to local storage
-                    
                   }
               }
-              expand="full" type="submit">Submit</IonButton> //href='/' forces the input fields reset
+              expand="full" type="submit">Submit</IonButton> 
               )}
             </UsernamesContextConsumer>
           </IonCol>

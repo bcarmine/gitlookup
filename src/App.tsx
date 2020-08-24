@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Add from './pages/Add';
 import TabBar from './pages/TabBar';
 import WatchlistTab from './pages/WatchlistTab';
+import Projects from './pages/Projects';
 import { Route } from 'react-router';
 import './App.css'
 
@@ -38,15 +39,13 @@ import { useDispatch } from 'react-redux';
 import { setUserState } from './redux/actions';
 
 const RoutingSystem: React.FC =() => {
-  //<Route path="/" component={Login} exact/>
-  //<Route path="/add" component={Add} exact/>
   return(
     <UsernamesContextProvider>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/tabbar" component={TabBar} exact/>
           <Route path="/add" component={Add} exact/>
-          <Route path="/watchlist" component={WatchlistTab} exact/>
+          <Route path="/tabbar/watchlist" component={WatchlistTab} exact/>
           <Route path="/register" component={Register} exact />
           <Route path="/" component={Login} exact />
         </IonRouterOutlet>

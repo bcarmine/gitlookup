@@ -5,21 +5,23 @@ import { IonTabs,
           IonIcon, 
           IonLabel, 
           IonRouterOutlet } from '@ionic/react';
-import { logOutOutline, listOutline, personAddOutline} from 'ionicons/icons';
+import { logOutOutline, listOutline, personAddOutline, logoGithub} from 'ionicons/icons';
 import { logoutUser } from '../firebaseConfig';
 import { Route, Redirect } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import Add from './Add';
 import WatchlistTab from './WatchlistTab';
 import './Main.css'
+import Projects from './Projects';
 
-const TabBar: React.FC = () => {
+const TabBar: React.FC = () => {    
   return(
 <IonReactRouter>
   <IonTabs>
     <IonRouterOutlet>
       <Route path="/tabbar/add" component={Add}/>
-      <Route path="/watchlist" component={WatchlistTab} exact={true}/>
+      <Route path="/tabbar/watchlist" component={WatchlistTab} exact={true}/>
+      <Route path="/tabbar/projects" component={Projects} exact/>
       <Route path="/tabbar" render={() => <Redirect to='/tabbar/add'/>} exact={true}/>
     </IonRouterOutlet>
       
@@ -30,9 +32,14 @@ const TabBar: React.FC = () => {
         <IonLabel>Add User</IonLabel>
       </IonTabButton>
 
-      <IonTabButton class="use-tertiary-selected" tab="watchlist" href="/watchlist">
+      <IonTabButton class="use-tertiary-selected" tab="watchlist" href="/tabbar/watchlist">
         <IonIcon  icon={listOutline} />
         <IonLabel>Watchlist</IonLabel>
+      </IonTabButton>
+
+      <IonTabButton class="use-tertiary-selected2" tab="projects" href="/tabbar/projects">
+        <IonIcon icon={logoGithub}/>
+        <IonLabel>Projects</IonLabel>
       </IonTabButton>
 
       <IonTabButton href="/login">

@@ -18,27 +18,31 @@ import { IonHeader,
   IonItemOption} from '@ionic/react';
 import './Main.css';
 import './WatchlistTab.css';
-import { updateUsernames, Username, Usernames, UsernamesContextConsumer } from '../model/UsernameState';
+import { updateUsernames, Username, Usernames, UsernamesContextConsumer, saveUsernames } from '../model/UsernameState';
+import { setSelectedUser } from '../model/UsernameState'
 import uuid from 'uuid';
-import { trashOutline } from 'ionicons/icons';
-import { Redirect, useHistory } from 'react-router';
+import { trashOutline, expandOutline } from 'ionicons/icons';
+import { useHistory } from 'react-router';
+import { toast } from '../components/toast';
 
 const WatchlistTab: React.FC = () => {
   const history = useHistory()
-  function refresh(){
-    history.replace('/watchlist')
+  function refresh(){ history.replace('/tabbar/watchlist') }
+
+  function redirectSelected(){ 
+    history.replace('/tabbar/projects')
+    //history.replace('/projects') 
   }
 
   return (
     <IonPage>
-      <Redirect to='/watchlist'></Redirect>
       <IonHeader>
         <IonToolbar>
           <IonTitle class="ion-text-center">Your Watchlist</IonTitle>
         </IonToolbar>
       </IonHeader>
+      
       <IonContent>
-
         <UsernamesContextConsumer>
           { (context : Usernames) =>
           <IonList class="border-primary list-padding">
@@ -47,7 +51,6 @@ const WatchlistTab: React.FC = () => {
             { (context.usernames)
               ? context.usernames.map((u : Username) =>
                 <IonItemSliding key={uuid.v4()}>
-
                   <IonItem class="border-primary">
                     <IonGrid>
                       <IonRow>
@@ -71,25 +74,38 @@ const WatchlistTab: React.FC = () => {
                     </IonGrid>
                   </IonItem>
 
-                  <IonItemOptions class="use-tertiary-background options-padding" side="end">
-                    <IonItemOption class="use-tertiary-background" 
+                  <IonItemOptions class="use-danger-background options-padding" side="end">
+                    <IonItemOption class="use-danger-background" 
                       onClick={() => {
                         var i = context.usernames.findIndex(o => o.username === u.username); //usernames must be unique
                         if (i > -1) context.usernames.splice(i, 1);
-                        updateUsernames(context.usernames);
-                        refresh();
+                        saveUsernames(context.usernames);
                       }}>
-                      <IonButton class="delete-button" color = "tertiary" onClick={refresh}>
+                      <IonButton class="" color = "danger" onClick={refresh}>
                         <IonIcon icon={trashOutline}></IonIcon>
+                      </IonButton>
+                    </IonItemOption>
+                  </IonItemOptions>
+
+                  <IonItemOptions class="use-tertiary-background options-padding" side="start">
+                    <IonItemOption class="use-tertiary-background" 
+                      onClick={() => {
+                        var i = context.usernames.findIndex(o => o.username === u.username);
+                        setSelectedUser(context.usernames[i])
+                        toast(context.usernames[i].name + " selected. Look in the projects tab!")
+                      }}>
+                      <IonButton class="option-button" color="tertiary" onClick={refresh}>
+                        <IonIcon icon={expandOutline}></IonIcon>
                       </IonButton>
                     </IonItemOption>
                   </IonItemOptions>
                 </IonItemSliding>)
               : {} }
               <IonItem>
-                <IonText class="label-medium ion-padding">
-                Add more users to your watchlist from the 'Add User' tab. <br/><br/>
-                Swipe a user on the list to the left and click on the trash icon to remove it from your watchlist permanently.<br/>
+                <IonText class="label-medium ion-padding ion-text-justify">
+                  Add more users to your watchlist from the 'Add User' tab. <br/><br/>
+                  Swipe a user on the list to the right and click on the expand icon to select the user. Once selected, go to the Projects tab to view their github projects.<br/><br/>
+                  Swipe a user on the list to the left and click on the trash icon to remove it from your watchlist permanently.<br/>
                 </IonText>
               </IonItem>
           </IonList>}

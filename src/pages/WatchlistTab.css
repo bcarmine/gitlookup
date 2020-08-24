@@ -15,12 +15,12 @@ ion-item{
     font-size: 1em;
 }
 
-.delete-button{
+.option-button{
     height: 100%;
     --box-shadow: none;
 }
 
-.delete-button:hover{
+.option-button:hover{
     color: var(--ion-color-tertiary);
 }
 

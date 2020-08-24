@@ -9,9 +9,17 @@ var currentProj: Project[];
 //flag used to determine whether the fetcher provided a result
 var resultFlag : boolean = false;
 // used for accessing the local storage
-const { Storage } = Plugins;
+export const { Storage } = Plugins;
 //field for storing the current user data from the fetch function 
 var currentUserData : UserData;
+
+var selectedUser: Username;
+export function setSelectedUser(value : Username){
+    selectedUser = value;
+}
+export function getSelectedUser(){
+    return selectedUser;
+}
 
 /**
  * Setter for the current project field.
@@ -19,7 +27,7 @@ var currentUserData : UserData;
  */
 export function setCurrentProj(proj : Project[] = []){ currentProj = proj; }
 /* Getter for the current project field */
-export function getCurrentProj() : Project[]{ return currentProj; }
+function getCurrentProj() : Project[]{ return currentProj; }
 
 /**
  * Setter for the result flag.
@@ -28,7 +36,7 @@ export function getCurrentProj() : Project[]{ return currentProj; }
  */
 export function setResultFlag(value : boolean = false){ resultFlag = value; }
 /*** getter for the result flag */
-export function getResultFlag(){ return resultFlag; }
+function getResultFlag(){ return resultFlag; }
 
 /**
  * Setter for the current user data field.
@@ -38,7 +46,7 @@ export function setCurrentUserData(value : UserData = {followers: 0, following: 
     currentUserData = value;
 }
 /** Getter for the current user data field */
-export function getCurrentUserData() : UserData { return currentUserData; }
+function getCurrentUserData() : UserData { return currentUserData; }
 
 /* Username interface: Github username that is entered by the user */
 export interface Username {
@@ -58,6 +66,7 @@ export interface Project{
     name: string;
     html_url: string;
     description: string;
+    language: string;
 }
 
 export interface UserData{
@@ -93,23 +102,23 @@ export async function saveUsernames(us : Username[]) {
                     u.followers = getCurrentUserData().followers;
                     u.following = getCurrentUserData().following;
                     u.numRepos = getCurrentUserData().publicRepos;
+                    
+                    updateUsernames(us); //write the usernames state to storage
+                    resetProjectState() //reset the projects, flag, and user data
+                    if(index === us.length-1){
+                        toast("Waitlist updated successfully!", 2000)  //tell the user that there was success
+                    }
                 })
 
-                resetProjectState() //reset the projects, flag, and user data
-
-                if(index === us.length-1){
-                    //tell the user when the info is updated
-                    toast("Waitlist updated successfully!", 2000) 
-                }
-                updateUsernames(us); //write the usernames state to storage
             }else { // fetch was unsucessful
                 //tell the user that the fetch was unsuccessful
                 toast("Github user does not exist! Try again.", 2000)
                 us.splice(index, 1) //exclude the failed entry
                 updateUsernames(us) //rewrite the usernames to local storage
+                return; 
             }
         });    
-    });   
+    });      
 }
 
 /**

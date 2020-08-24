@@ -24,7 +24,8 @@ export async function fetcher(username : string){
                 return {
                     name: project.name,
                     html_url: project.html_url,
-                    description: project.description
+                    description: project.description,
+                    language: project.language
                 }
             });
             //store the projects and cast them as type Project
@@ -56,7 +57,6 @@ export async function fetchUser(username : string){
     .then(res => res.json())
     .then(userData => {
         setCurrentUserData({followers : userData.followers, 
-            following : userData.following, publicRepos: userData.public_repos})
-        return;
+            following : userData.following, publicRepos: userData.public_repos});
     });
 }
