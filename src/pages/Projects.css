@@ -1,2 +1,8 @@
 /*Text size for list elements*/
 .size-small{ font-size: 0.8em; }
+
+.option-button{
+    height: 100%;
+    --box-shadow: none;
+}
+.option-button:hover{ color: var(--ion-color-tertiary); }

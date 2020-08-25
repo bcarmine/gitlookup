@@ -17,7 +17,8 @@ import { IonContent,
           IonIcon,
           IonLoading,
           IonLabel} from '@ionic/react';
-import { getSelectedUser, Project } from '../model/UserState';
+import { getSelectedUser } from '../model/UserState';
+import { Project } from '../model/Types'
 import uuid from 'uuid'; //needed for the sliding items
 import { linkOutline } from 'ionicons/icons';
 //CSS imports
@@ -120,7 +121,7 @@ const Projects: React.FC = () => {
                         var i = projects.findIndex(o => o.name === project.name);
                         window.location.href = projects[i].html_url as string;
                       }}>                         
-                      <IonButton color = "tertiary">
+                      <IonButton class="option-button" color = "tertiary">
                         <IonIcon icon={linkOutline} ></IonIcon>
                       </IonButton>
                     </IonItemOption>

@@ -30,7 +30,7 @@ const TabBar: React.FC = () => {
         
       <IonTabBar slot="bottom">
         
-        <IonTabButton tab="add" href="/add">
+        <IonTabButton tab="add" href="/tabbar/add">
           <IonIcon icon={personAddOutline} />
           <IonLabel>Add User</IonLabel>
         </IonTabButton>

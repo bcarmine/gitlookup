@@ -8,7 +8,6 @@ import { IonReactRouter } from '@ionic/react-router';
 //local imports
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Add from './pages/Add';
 import TabBar from './pages/TabBar';
 import WatchlistTab from './pages/WatchlistTab';
 import { Route } from 'react-router';
@@ -16,7 +15,7 @@ import { getCurrentUser } from './firebaseConfig';
 //CSS imports
 import './App.css'
 
-import {UsernamesContextProvider} from './model/UserState'
+import {UsernamesContextProvider} from './model/Context'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,7 +47,6 @@ const RoutingSystem: React.FC =() => {
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/tabbar" component={TabBar} exact/>
-          <Route path="/add" component={Add} exact/>
           <Route path="/tabbar/watchlist" component={WatchlistTab} exact/>
           <Route path="/tabbar/projects" component={Projects} exact/>
           <Route path="/register" component={Register} exact />

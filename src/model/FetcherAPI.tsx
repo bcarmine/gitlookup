@@ -1,4 +1,5 @@
-import { Project, setCurrentProj, setResultFlag, setCurrentUserData } from './UserState'
+import { setCurrentProj, setResultFlag, setCurrentUserData } from './UserState'
+import { Project } from './Types'
 
 /**
  * Function to fetch github projects of a given user from

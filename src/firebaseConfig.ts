@@ -63,7 +63,7 @@ export async function loginUser(email: string, password:string){
  */
 export async function registerUser(email: string, password:string){
     try{
-        const res = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
         return true; //if there was no error, then return true
     }catch(error){ //handle an error and inform the user
         toast(error.message, 4000)
