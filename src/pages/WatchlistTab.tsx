@@ -21,8 +21,8 @@ import uuid from 'uuid';
 import { trashOutline, expandOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 //internal imports
-import { Username, Usernames, UsernamesContextConsumer, saveUsernames } from '../model/UsernameState';
-import { setSelectedUser } from '../model/UsernameState'
+import { Username, Usernames, UsernamesContextConsumer, saveUsernames } from '../model/UserState';
+import { setSelectedUser } from '../model/UserState'
 import { toast } from '../components/toast';
 //CSS imports
 import './Main.css';

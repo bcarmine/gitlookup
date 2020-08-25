@@ -12,7 +12,7 @@ import { IonHeader,
           IonButton} from '@ionic/react';
 import { Redirect } from 'react-router';
 //local imports
-import { saveUsernames, Usernames, UsernamesContextConsumer } from '../model/UsernameState'
+import { saveUsernames, Usernames, UsernamesContextConsumer } from '../model/UserState'
 //CSS imports
 import './Main.css';
 

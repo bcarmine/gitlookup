@@ -2,7 +2,7 @@ import { createContext, useState, useEffect} from 'react';
 import * as React from 'react';
 import { Plugins } from '@capacitor/core'
 import { toast } from '../components/toast';
-import { fetcher , fetchUser} from './Fetcher'
+import { fetcher , fetchUser} from './FetcherAPI'
 
 // ----------------------------- Fields ------------------------------------------
 

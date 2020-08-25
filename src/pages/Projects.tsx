@@ -17,7 +17,7 @@ import { IonContent,
           IonIcon,
           IonLoading,
           IonLabel} from '@ionic/react';
-import { getSelectedUser, Project } from '../model/UsernameState';
+import { getSelectedUser, Project } from '../model/UserState';
 import uuid from 'uuid'; //needed for the sliding items
 import { linkOutline } from 'ionicons/icons';
 //CSS imports

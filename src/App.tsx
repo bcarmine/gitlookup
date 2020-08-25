@@ -16,7 +16,7 @@ import { getCurrentUser } from './firebaseConfig';
 //CSS imports
 import './App.css'
 
-import {UsernamesContextProvider} from './model/UsernameState'
+import {UsernamesContextProvider} from './model/UserState'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
