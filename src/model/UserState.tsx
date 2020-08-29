@@ -60,12 +60,19 @@ export function getSelectedUser(){ return selectedUser; }
  * Uses toasts to communicate success/failure with the user.
  * @param {Username[]} us the usernames to save
  */
-export async function saveUsernames(us : Username[]) {    
+export async function saveUsernames(us : Username[]) { 
+    //handles the case where the only watchlist username is deleted   
+    if(us.length === 0){
+        updateUsernames(us)
+        toast("Watchlist updated successfully!", 2000)
+        return;
+    }
+
     //if there is a duplicate, remove it!
     if(checkDuplicateEntry(us)){
         us.splice(us.length-1, 1)
         updateUsernames(us)
-        toast("Error: This username is already on your watchlist!", 2000)
+        toast("Error: This username is already on your watchlist!", 3000)
         return; //stop the function there
     }
 
@@ -85,7 +92,7 @@ export async function saveUsernames(us : Username[]) {
                     updateUsernames(us); //write the usernames state to storage
                     resetProjectState() //reset the projects, flag, and user data
                     if(index === us.length-1){
-                        toast("Waitlist updated successfully!", 2000)  //tell the user that there was success
+                        toast("Watchlist updated successfully!", 2000)  //tell the user that there was success
                     }
                 })
 

@@ -14,7 +14,7 @@ import { IonHeader,
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 //local imports
-import {loginUser} from '../firebaseConfig'
+import {loginUser} from '../authentication/firebaseConfig'
 import { toast } from '../components/toast';
 //CSS imports
 import './Main.css';
@@ -37,7 +37,7 @@ const Login: React.FC = () => {
         setBusy(true) //busy state indicates ion loading
         const res:any = await loginUser(email, password)
         if(res){
-            toast('Login successful', 2000)
+            toast('Login successful!', 2000)
             history.replace('/tabbar/add')
             history.replace('/tabbar') //add
         }

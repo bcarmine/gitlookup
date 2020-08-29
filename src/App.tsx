@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import TabBar from './pages/TabBar';
 import WatchlistTab from './pages/WatchlistTab';
 import { Route } from 'react-router';
-import { getCurrentUser } from './firebaseConfig';
+import { getCurrentUser } from './authentication/firebaseConfig';
 //CSS imports
 import './App.css'
 

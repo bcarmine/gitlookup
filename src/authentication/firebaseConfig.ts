@@ -1,5 +1,5 @@
 import * as firebase from 'firebase'
-import { toast } from './components/toast';
+import { toast } from '../components/toast';
 
 //api configuration
 const config ={

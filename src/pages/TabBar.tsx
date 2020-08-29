@@ -10,7 +10,7 @@ import { logOutOutline, listOutline, personAddOutline, logoGithub} from 'ionicon
 import { Route, Redirect } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 //internal imports
-import { logoutUser } from '../firebaseConfig';
+import { logoutUser } from '../authentication/firebaseConfig';
 import Add from './Add';
 import WatchlistTab from './WatchlistTab';
 import Projects from './Projects';

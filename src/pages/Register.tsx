@@ -14,7 +14,7 @@ import { IonHeader,
 import { Link, useHistory } from 'react-router-dom';
 //internal imports
 import { toast } from '../components/toast';
-import {registerUser} from '../firebaseConfig'
+import {registerUser} from '../authentication/firebaseConfig'
 //CSS imports
 import './Main.css';
 
